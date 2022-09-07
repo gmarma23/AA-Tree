@@ -1,2 +1,2 @@
 # AA-Tree
-C++ implementation for the AA-Tree data structure
+C++ implementation of the AA-Tree data structure

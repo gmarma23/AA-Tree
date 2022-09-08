@@ -26,6 +26,6 @@ Although Red-Black trees are more consistent in their performance with slightly 
 
   
 # Split
-  The split operation needs to be applied in case of adjacent horizontal links (red nodes).
+  The split operation needs to be applied in case of adjacent horizontal links.
   
   ![split](https://user-images.githubusercontent.com/100040302/189130155-f5c780b1-9abc-44c9-b6f2-2ac1f35d2ecd.jpg)

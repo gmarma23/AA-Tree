@@ -21,9 +21,11 @@ Although Red-Black trees are more consistent in their performance with slightly 
    
 # Skew    
   The skew operation needs to be applied in case of a left horizontal link.
+  
   ![skew](https://user-images.githubusercontent.com/100040302/189130171-9656da86-509f-4dee-a7b6-b7924b622f3d.jpg)
 
   
 # Split
   The split operation needs to be applied in case of adjacent horizontal links (red nodes).
+  
   ![split](https://user-images.githubusercontent.com/100040302/189130155-f5c780b1-9abc-44c9-b6f2-2ac1f35d2ecd.jpg)

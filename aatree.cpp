@@ -1,9 +1,25 @@
 #include <iostream>
 #include "aatree.h"
-#include "exceptions.h"
 
 #define ANSI_COLOR_RED "\x1b[31m"
 #define ANSI_COLOR_RESET "\x1b[0m"
+
+using std::string;
+using std::cout;
+using std::cerr;
+using std::endl;
+
+void Exception::printErrorMessage(string msg){ 
+    cerr << msg << endl; 
+}
+
+DuplicateElementsException::DuplicateElementsException(string msg){ 
+    this->msg = msg; 
+}
+
+ElementNotFoundException::ElementNotFoundException(string msg){ 
+    this->msg = msg; 
+}
 
 template <class T>
 BinTreeNode<T>::BinTreeNode(const T& x){ 
@@ -71,9 +87,6 @@ void AATree<T>::insert(BinTreeNode<T> *&currentNode, BinTreeNode<T> *&newNode){
     // perform skew and split at each level from inserted node up to root
     skew(currentNode); 
     split(currentNode);
-
-    //printFormattedTree();
-    //std::cout << std::endl;
 }
 
 template<class T>
@@ -132,9 +145,6 @@ void AATree<T>::remove(const T& x){
     catch(ElementNotFoundException e){
         e.printErrorMessage(e.msg);
     }
-
-    //printFormattedTree();
-    //std::cout << std::endl;
 }
 
 template<class T>
@@ -142,64 +152,64 @@ void AATree<T>::printFormattedTree(BinTreeNode<T> *node, BinTreeNode<T> *parent,
     // output is rotated 90 degrees to the left
     if(!node) return;
     printFormattedTree(node->right, node, indent + 4);
-    for(int i=0; i < indent; i++) std::cout << " ";
+    for(int i=0; i < indent; i++) cout << " ";
     if(parent && (node->level == parent->level)) 
-        std::cout << ANSI_COLOR_RED << node->data << ANSI_COLOR_RESET << std::endl;
+        cout << ANSI_COLOR_RED << node->data << ANSI_COLOR_RESET << endl;
     else
-        std::cout << node->data << std::endl;
+        cout << node->data << endl;
     printFormattedTree(node->left, node, indent + 4);
 }
 
 template<class T>
 void AATree<T>::printFormattedTree() const{ 
-    std::cout << std::endl;
+    cout << endl;
     printFormattedTree(root, nullptr, 6); 
-    std::cout << std::endl;
+    cout << endl;
 }
 
 template <class T>
 void AATree<T>::postorder(BinTreeNode<T> *node) const{
     if(!node) return;
-    postorder(node->left);          // recur on left subtree
-    postorder(node->right);         // recur on right subtree
-    std::cout << node->data << " "; // print node's data
+    postorder(node->left);     // recur on left subtree
+    postorder(node->right);    // recur on right subtree
+    cout << node->data << " "; // print node's data
 }
 
 template <class T>
 void AATree<T>::postorder() const{
-    std::cout << "Postorder: ";
+    cout << "Postorder: ";
     postorder(root);
-    std::cout << std::endl;
+    cout << endl;
 }
 
 template <class T>
 void AATree<T>::inorder(BinTreeNode<T> *node) const{
     if(!node) return;
-    inorder(node->left);            // recur on left subtree
-    std::cout << node->data << " "; // print node's data
-    inorder(node->right);           // recur on right subtree
+    inorder(node->left);       // recur on left subtree
+    cout << node->data << " "; // print node's data
+    inorder(node->right);      // recur on right subtree
 }
 
 template <class T>
 void AATree<T>::inorder() const{
-    std::cout << "Inorder: ";
+    cout << "Inorder: ";
     inorder(root);
-    std::cout << std::endl;
+    cout << endl;
 }
 
 template <class T>
 void AATree<T>::preorder(BinTreeNode<T> *node) const{
     if(!node) return;
-    std::cout << node->data << " "; // print node's data
-    preorder(node->left);           // recur on left subtree
-    preorder(node->right);          // recur on right subtree
+    cout << node->data << " "; // print node's data
+    preorder(node->left);      // recur on left subtree
+    preorder(node->right);     // recur on right subtree
 }
 
 template <class T>
 void AATree<T>::preorder() const{
-    std::cout << "Preorder: ";
+    cout << "Preorder: ";
     preorder(root);
-    std::cout << std::endl;
+    cout << endl;
 }
 
 template<class T>
